@@ -35,6 +35,8 @@ const styles = stylex.create({
       default: spacing.xl,
       "@media (max-width: 600px)": spacing.xxl,
     },
+    position: 'relative',
+    zIndex: 10,
   },
   header: {
     alignItems: "center",
