@@ -31,6 +31,10 @@ export default function RootLayout({
 const styles = stylex.create({
   logoLink: {
     display: 'block',
+    marginBottom: {
+      default: spacing.xl,
+      "@media (max-width: 600px)": spacing.xxl,
+    },
   },
   header: {
     alignItems: "center",
@@ -42,8 +46,8 @@ const styles = stylex.create({
   },
   logo: {
     width: {
-      default: 120,
-      "@media (max-width: 600px)": 80,
+      default: 100,
+      "@media (max-width: 600px)": 60,
     },
   },
   main: {
