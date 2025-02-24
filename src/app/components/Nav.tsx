@@ -6,8 +6,8 @@ import { spacing } from "../vars.stylex";
 export function Nav() {
   return (
     <nav {...stylex.props(styles.navContainer)}>
-      <Link {...stylex.props(styles.navLink)} href="/blog">
-        Blog
+      <Link {...stylex.props(styles.navLink)} href="/search">
+        Search
       </Link>
       <a
         {...stylex.props(styles.navLink)}
@@ -38,6 +38,14 @@ const styles = stylex.create({
     position: "absolute",
     top: 8,
     width: "auto",
+    flexDirection: {
+      default: "column",
+      "@media (min-width: 768px)": "row",
+    },
+    paddingRight: {
+      default: "48px", // Make room for the dark mode toggle
+      "@media (min-width: 768px)": spacing.sm,
+    },
   },
   navLink: {
     color: "light-dark(crimson, cornflowerblue)",

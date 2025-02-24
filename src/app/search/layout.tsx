@@ -6,8 +6,8 @@ import { Link } from "next-view-transitions";
 import Nav from "../components/Nav";
 
 export const metadata: Metadata = {
-  title: "Blog | Jared Cervantes",
-  description: "Longer form blog pasts and experiments.",
+  title: "Search | Jared Cervantes",
+  description: "Personal search engine",
 };
 
 export default function RootLayout({
