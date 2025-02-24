@@ -32,7 +32,10 @@ export function Nav() {
 const styles = stylex.create({
   navContainer: {
     display: "flex",
-    gap: spacing.xl,
+    gap: {
+      default: spacing.sm,  // Reduced gap for mobile
+      "@media (min-width: 768px)": spacing.xl, // Keep original gap for desktop
+    },
     left: 0,
     padding: spacing.sm,
     position: "absolute",
