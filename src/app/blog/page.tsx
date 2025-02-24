@@ -6,26 +6,33 @@ import { getBlogPosts } from "./getPosts";
 
 export default async function Home() {
   const posts = await getBlogPosts();
-  const publishedPosts = posts.filter((post) => post.published);
+  // Temporarily hide all posts
+  const publishedPosts: typeof posts = []; // Force empty array for now
+  // When ready, uncomment this line:
+  // const publishedPosts = posts.filter((post) => post.published);
 
   return (
     <div>
       <H1 xstyle={styles.h1}>Latest Posts</H1>
-      <Ul xstyle={styles.ul}>
-        {publishedPosts.map((post) => (
-          <li {...stylex.props(styles.li)} key={post.path}>
-            <div {...stylex.props(styles.row)}>
-              <Link {...stylex.props(styles.link)} href={post.path}>
-                {post.title
-                  ? wrapTitleWithViewTransitionNames(post.title, post.path)
-                  : ""}
-              </Link>
-              <span {...stylex.props(styles.date)}>{post.date}</span>
-            </div>
-            <P xstyle={styles.p}>{post.description}</P>
-          </li>
-        ))}
-      </Ul>
+      {publishedPosts.length === 0 ? (
+        <P {...stylex.props(styles.comingSoon)}>Coming soon! Stay tuned...</P>
+      ) : (
+        <Ul xstyle={styles.ul}>
+          {publishedPosts.map((post) => (
+            <li {...stylex.props(styles.li)} key={post.path}>
+              <div {...stylex.props(styles.row)}>
+                <Link {...stylex.props(styles.link)} href={post.path}>
+                  {post.title
+                    ? wrapTitleWithViewTransitionNames(post.title, post.path)
+                    : ""}
+                </Link>
+                <span {...stylex.props(styles.date)}>{post.date}</span>
+              </div>
+              <P xstyle={styles.p}>{post.description}</P>
+            </li>
+          ))}
+        </Ul>
+      )}
     </div>
   );
 }
@@ -133,5 +140,11 @@ const styles = stylex.create({
     marginTop: null,
     opacity: 0.5,
     width: "100%",
+  },
+  comingSoon: {
+    textAlign: "center",
+    fontSize: text.h4,
+    opacity: 0.7,
+    marginTop: spacing.xl,
   },
 });
