@@ -2,14 +2,15 @@ import { Feed } from "feed";
 
 export async function GET() {
   const feed = new Feed({
-    title: "JC's Blog",
-    id: "https://your-domain.com/",
-    link: "https://your-domain.com/",
+    title: "Jared Cervantes' Blog",
+    id: "https://jaredcervantes.com",
+    link: "https://jaredcervantes.com",
     updated: new Date(),
     author: {
-      name: "JC",
-      link: "https://your-domain.com/",
+      name: "Jared Cervantes",
+      link: "https://jaredcervantes.com",
     },
+    copyright: "All rights reserved 2025",
   });
 
   return new Response(feed.atom1(), {
