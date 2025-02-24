@@ -1,9 +1,18 @@
+'use client';
 import React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { Link } from "next-view-transitions";
 import { spacing } from "../vars.stylex";
+import { usePathname } from 'next/navigation';
 
 export function Nav() {
+  const pathname = usePathname();
+  
+  // Only render nav on search page
+  if (pathname !== '/search') {
+    return null;
+  }
+
   return (
     <nav {...stylex.props(styles.navContainer)}>
       <Link {...stylex.props(styles.navLink)} href="/search">
