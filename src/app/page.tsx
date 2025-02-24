@@ -60,7 +60,12 @@ const styles = stylex.create({
   },
   nav: {
     display: "flex",
-    gap: 48,
+    gap: spacing.xl,
+    flexDirection: {
+      default: "column",
+      "@media (min-width: 640px)": "row",
+    },
+    alignItems: "center",
   },
   navLink: {
     color: "light-dark(crimson, cornflowerblue)",
@@ -71,5 +76,6 @@ const styles = stylex.create({
     textTransform: "uppercase",
     textUnderlineOffset: "8px",
     width: "fit-content",
+    textAlign: "center",
   },
 });
