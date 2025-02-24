@@ -71,7 +71,7 @@ export default function Home() {
 
 const styles = stylex.create({
   container: {
-    minHeight: '100vh',
+    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -79,13 +79,11 @@ const styles = stylex.create({
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
-    gap: 32,
+    gap: 24,
     justifyContent: "center",
-    minHeight: {
-      default: "90vh",
-      "@supports (height: 100dvh)": "90dvh",
-    },
+    height: "70vh",
     paddingBlock: spacing.sm,
+    marginTop: spacing.xl,
   },
   h3: {
     fontSize: "2rem",
@@ -93,18 +91,22 @@ const styles = stylex.create({
     margin: 0,
   },
   logo: {
-    maxWidth: 800,
-    transform: "translateX(1.5%)",
+    maxWidth: {
+      default: 500,
+      "@media (max-width: 600px)": 350,
+    },
+    transform: "translateX(-3%)",
     width: "calc(100% - 32px)",
   },
   nav: {
     display: "flex",
-    gap: spacing.xl,
+    gap: spacing.lg,
     flexDirection: {
       default: "column",
       "@media (min-width: 640px)": "row",
     },
     alignItems: "center",
+    marginBottom: 0,
   },
   navLink: {
     color: "light-dark(crimson, cornflowerblue)",
@@ -124,9 +126,11 @@ const styles = stylex.create({
     width: '100%',
   },
   socialLinks: {
+    marginTop: spacing.sm,
+    marginBottom: spacing.md,
     display: 'flex',
+    gap: spacing.xl,
     justifyContent: 'center',
-    gap: spacing.md,
   },
   footerLink: {
     color: 'light-dark(crimson, cornflowerblue)',

@@ -80,12 +80,19 @@ const styles = stylex.create({
     backgroundColor: colors.bg,
     color: colors.fg,
     fontFamily: fonts.sans,
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
   },
   footer: {
     color: colors.surface1,
     fontFamily: fonts.sans,
-    marginTop: spacing.xl,
-    paddingBlock: 32,
+    marginTop: 'auto',
+    paddingBlock: {
+      default: 16,
+      "@media (max-width: 600px)": 8,
+    },
     textAlign: "center",
+    backgroundColor: colors.bg,
   },
 });
