@@ -17,6 +17,7 @@
     "@types/mdx": "^2.0.13",
     "bright": "^1.0.0",
     "feed": "^4.2.2",
+    "framer-motion": "^12.4.7",
     "next": "15.1.7",
     "next-view-transitions": "^0.3.4",
     "react": "19.0.0",

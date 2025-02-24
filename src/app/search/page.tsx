@@ -7,6 +7,7 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -14,6 +15,8 @@ export default function Home() {
         setSuggestions([]);
         return;
       }
+      
+      setIsLoading(true);
       try {
         const response = await fetch(`/api/autocomplete?q=${encodeURIComponent(query)}&t=${Date.now()}`);
         if (!response.ok) {
@@ -21,10 +24,12 @@ export default function Home() {
         }
         const data = await response.json();
         setSuggestions(data);
-        setSelectedIndex(-1); // Reset selection when new suggestions arrive
+        setSelectedIndex(-1);
       } catch (error) {
         console.error('Failed to fetch suggestions:', error);
         setSuggestions([]);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -78,17 +83,20 @@ export default function Home() {
           method="get" 
           action="https://search.jaredcervantes.com/search"
         >
-          <input
-            {...stylex.props(styles.input)}
-            type="search"
-            name="q"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Search..."
-            autoFocus
-            autoComplete="off"
-          />
+          <div {...stylex.props(styles.inputWrapper)}>
+            <input
+              {...stylex.props(styles.input)}
+              type="search"
+              name="q"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Search..."
+              autoFocus
+              autoComplete="off"
+            />
+            {isLoading && <div {...stylex.props(styles.loadingDot)} />}
+          </div>
         </form>
         {suggestions.length > 0 && (
           <ul {...stylex.props(styles.suggestions)}>
@@ -124,6 +132,12 @@ export default function Home() {
   );
 }
 
+const pulse = stylex.keyframes({
+  '0%': { transform: 'scale(0.95)', opacity: 0.5 },
+  '50%': { transform: 'scale(1.05)', opacity: 0.8 },
+  '100%': { transform: 'scale(0.95)', opacity: 0.5 },
+});
+
 const styles = stylex.create({
   h1: {
     textAlign: "center",
@@ -132,12 +146,31 @@ const styles = stylex.create({
     fontSize: text.h1,
     fontWeight: 600,
   },
+  notice: {
+    textAlign: 'center',
+    color: 'color-mix(in oklch, ${colors.fg}, transparent 40%)',
+    fontSize: '0.9rem',
+    marginBottom: spacing.xl,
+    maxWidth: '600px',
+    margin: '0 auto 24px',
+    padding: '0 16px',
+  },
+  searchContainer: {
+    position: 'relative',
+    width: '100%',
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
   form: {
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
     maxWidth: '600px',
     margin: '0 auto',
+  },
+  inputWrapper: {
+    position: 'relative',
+    width: '100%',
   },
   input: {
     width: '100%',
@@ -152,11 +185,17 @@ const styles = stylex.create({
     color: colors.fg,
     outline: 'none',
   },
-  searchContainer: {
-    position: 'relative',
-    width: '100%',
-    maxWidth: '600px',
-    margin: '0 auto',
+  loadingDot: {
+    position: 'absolute',
+    right: '12px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '12px',
+    height: '12px',
+    borderRadius: '50%',
+    backgroundColor: 'light-dark(crimson, cornflowerblue)',
+    animation: `${pulse} 1.5s ease-in-out infinite`,
+    zIndex: 2000,
   },
   suggestions: {
     position: 'absolute',
@@ -181,14 +220,5 @@ const styles = stylex.create({
   },
   selectedSuggestion: {
     backgroundColor: `color-mix(in oklch, ${colors.accent}, transparent 90%)`,
-  },
-  notice: {
-    textAlign: 'center',
-    color: 'color-mix(in oklch, ${colors.fg}, transparent 40%)',
-    fontSize: '0.9rem',
-    marginBottom: spacing.xl,
-    maxWidth: '600px',
-    margin: '0 auto 24px',
-    padding: '0 16px',
   },
 });

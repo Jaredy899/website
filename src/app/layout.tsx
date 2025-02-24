@@ -4,10 +4,16 @@ import { colors, fonts, spacing } from "./vars.stylex";
 import ThemeControl from "./ThemeControl";
 import "./app.css";
 import { ViewTransitions } from "next-view-transitions";
+import { Viewport } from 'next';
+import Nav from "./components/Nav";
 
 export const metadata: Metadata = {
   title: "Jared Cervantes",
   description: "Personal website and blog of Jared Cervantes.",
+};
+
+export const viewport: Viewport = {
+  themeColor: 'light-dark(white, black)',
 };
 
 export default function RootLayout({
@@ -47,6 +53,7 @@ export default function RootLayout({
           <link rel="manifest" href="/site.webmanifest" />
         </head>
         <ThemeControl style={styles.body}>
+          <Nav />
           {children}
           <footer {...stylex.props(styles.footer)}>All Rights Reserved.</footer>
         </ThemeControl>
