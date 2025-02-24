@@ -69,6 +69,9 @@ export default function Home() {
   return (
     <div>
       <h1 {...stylex.props(styles.h1)}>Search</h1>
+      <p {...stylex.props(styles.notice)}>
+        This is a private search instance. Response times may vary.
+      </p>
       <div {...stylex.props(styles.searchContainer)}>
         <form 
           {...stylex.props(styles.form)} 
@@ -125,7 +128,7 @@ const styles = stylex.create({
   h1: {
     textAlign: "center",
     textWrap: "balance" as const,
-    marginBottom: spacing.xl,
+    marginBottom: spacing.sm,
     fontSize: text.h1,
     fontWeight: 600,
   },
@@ -178,5 +181,14 @@ const styles = stylex.create({
   },
   selectedSuggestion: {
     backgroundColor: `color-mix(in oklch, ${colors.accent}, transparent 90%)`,
+  },
+  notice: {
+    textAlign: 'center',
+    color: 'color-mix(in oklch, ${colors.fg}, transparent 40%)',
+    fontSize: '0.9rem',
+    marginBottom: spacing.xl,
+    maxWidth: '600px',
+    margin: '0 auto 24px',
+    padding: '0 16px',
   },
 });
