@@ -1,5 +1,3 @@
-const { createStylexPlugin } = require('@stylexjs/nextjs-plugin');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
@@ -33,11 +31,4 @@ const nextConfig = {
   },
 };
 
-const stylexPlugin = createStylexPlugin({
-  rootDir: __dirname,
-  aliases: {
-    '@/*': ['./*'],
-  },
-});
-
-module.exports = stylexPlugin(nextConfig); 
+module.exports = nextConfig; 
