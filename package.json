@@ -16,6 +16,7 @@
     "@stylexjs/nextjs-plugin": "^0.10.1",
     "@stylexjs/stylex": "^0.10.1",
     "@types/mdx": "^2.0.13",
+    "@vercel/analytics": "^1.5.0",
     "bright": "^1.0.0",
     "feed": "^4.2.2",
     "framer-motion": "^12.4.7",

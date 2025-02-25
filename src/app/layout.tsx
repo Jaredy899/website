@@ -9,7 +9,7 @@ import Nav from "./components/Nav";
 
 export const metadata: Metadata = {
   title: "Jared Cervantes",
-  description: "Personal website and blog of Jared Cervantes.",
+  description: "Personal website of Jared Cervantes.",
 };
 
 export const viewport: Viewport = {
