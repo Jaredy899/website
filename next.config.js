@@ -4,31 +4,31 @@ const nextConfig = {
     return [
       {
         source: '/mac',
-        destination: 'https://raw.githubusercontent.com/Jaredy899/mac/main/setup.sh',
+        destination: process.env.REDIRECT_MAC,
         permanent: true,
       },
       {
         source: '/win',
-        destination: 'https://raw.githubusercontent.com/Jaredy899/win/main/first-setup.ps1',
+        destination: process.env.REDIRECT_WIN,
         permanent: true,
       },
       {
         source: '/linux',
-        destination: 'https://raw.githubusercontent.com/Jaredy899/linux/refs/heads/main/linux.sh',
+        destination: process.env.REDIRECT_LINUX,
         permanent: true,
       },
       {
         source: '/linuxdev',
-        destination: 'https://raw.githubusercontent.com/Jaredy899/linux/refs/heads/dev/linux.sh',
+        destination: process.env.REDIRECT_LINUX_DEV,
         permanent: true,
       },
       {
         source: '/debian',
-        destination: 'https://raw.githubusercontent.com/Jaredy899/linux/refs/heads/main/config_changes/preseed.cfg',
+        destination: process.env.REDIRECT_DEBIAN,
         permanent: true,
       },
     ];
   },
 };
 
-module.exports = nextConfig; 
+module.exports = nextConfig;
