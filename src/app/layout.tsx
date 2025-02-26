@@ -6,6 +6,8 @@ import "./app.css";
 import { ViewTransitions } from "next-view-transitions";
 import { Viewport } from 'next';
 import Nav from "./components/Nav";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: "Jared Cervantes",
@@ -42,6 +44,8 @@ export default function RootLayout({
           <Nav />
           {children}
           <footer {...stylex.props(styles.footer)}>All Rights Reserved.</footer>
+          <Analytics />
+          <SpeedInsights />
         </ThemeControl>
       </html>
     </ViewTransitions>
