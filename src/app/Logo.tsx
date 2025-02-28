@@ -17,7 +17,7 @@ export default function Logo({ collapsible = false, style }: Props) {
         <path
           {...stylex.props(styles.letter, styles.j)}
           aria-label="J"
-          d="M285 0V334.421L150.264679 416.503L150 416.396V334.421L240 280V0H285Z"
+          d="M285 0H240V334.06C240 354.821 223.018 371.797 202.25 371.797H120V416.797H202.25C248.027 416.797 285 379.775 285 334.06V0Z"
         />
         
         <path
