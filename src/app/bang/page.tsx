@@ -339,15 +339,26 @@ const styles = stylex.create({
     marginBottom: spacing.sm,
     borderRadius: '4px',
     overflow: 'hidden',
-    border: `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    border: {
+      default: `1px solid ${colors.fg}`,
+      '@media (color-gamut: p3)': `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    },
+    backgroundColor: {
+      default: 'transparent',
+      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.bg}, transparent 95%)`,
+    },
   },
   urlInput: {
     flexGrow: 1,
     padding: `${spacing.xs} ${spacing.sm}`,
     border: 'none',
+    outline: 'none',
     backgroundColor: 'transparent',
     color: colors.fg,
     fontSize: '0.9rem',
+    minWidth: 0,
+    WebkitAppearance: 'none',
+    appearance: 'none',
   },
   copyButton: {
     display: 'flex',
@@ -356,12 +367,19 @@ const styles = stylex.create({
     padding: spacing.xs,
     backgroundColor: 'transparent',
     border: 'none',
-    borderLeft: `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    borderLeft: {
+      default: `1px solid ${colors.fg}`,
+      '@media (color-gamut: p3)': `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    },
     cursor: 'pointer',
     transition: 'background-color 0.2s ease',
     ':hover': {
-      backgroundColor: 'color-mix(in oklch, ${colors.fg}, transparent 95%)',
+      backgroundColor: {
+        default: `rgba(128, 128, 128, 0.1)`,
+        '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.fg}, transparent 95%)`,
+      },
     },
+    color: colors.fg,
   },
   iconContainer: {
     display: 'flex',
