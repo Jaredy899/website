@@ -118,7 +118,7 @@ function BangContent() {
   return (
     <div {...stylex.props(styles.container)}>
       <div {...stylex.props(styles.contentContainer)}>
-        <h1 {...stylex.props(styles.h1)}>Jared's Bang Search</h1>
+        <h1 {...stylex.props(styles.h1)}>Bang Search</h1>
         <p {...stylex.props(styles.description)}>
           Add the following URL as a custom search engine to your browser.
           <br />
