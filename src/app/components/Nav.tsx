@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation';
 export function Nav() {
   const pathname = usePathname();
   
-  // Only render nav on search or unduck pages
-  if (pathname !== '/search' && pathname !== '/unduck') {
+  // Only render nav on search and bang pages
+  if (pathname !== '/search' && pathname !== '/bang') {
     return null;
   }
 
@@ -17,9 +17,6 @@ export function Nav() {
     <nav {...stylex.props(styles.navContainer)}>
       <Link {...stylex.props(styles.navLink)} href="/search">
         Search
-      </Link>
-      <Link {...stylex.props(styles.navLink)} href="/unduck">
-        Unduck
       </Link>
       <a
         {...stylex.props(styles.navLink)}
@@ -29,14 +26,9 @@ export function Nav() {
       >
         Personal Applications
       </a>
-      <a
-        {...stylex.props(styles.navLink)}
-        href="https://github.com/Jaredy899"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Projects
-      </a>
+      <Link {...stylex.props(styles.navLink)} href="/bang">
+        Bang
+      </Link>
     </nav>
   );
 }
@@ -70,6 +62,8 @@ const styles = stylex.create({
     },
     textTransform: "uppercase",
     textUnderlineOffset: "8px",
+    width: "fit-content",
+    textAlign: "center",
   },
 });
 
