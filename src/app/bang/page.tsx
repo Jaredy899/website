@@ -304,10 +304,7 @@ const styles = stylex.create({
     width: '100%',
     padding: spacing.sm,
     borderRadius: '8px',
-    backgroundColor: {
-      default: `rgba(128, 128, 128, 0.05)`,
-      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.bg}, transparent 50%)`,
-    },
+    backgroundColor: 'color-mix(in oklch, ${colors.bg}, transparent 50%)',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     marginTop: spacing.xs,
     marginBottom: '120px',
@@ -458,13 +455,8 @@ const styles = stylex.create({
     padding: spacing.md,
     textAlign: 'center',
     width: '100%',
-    backgroundColor: {
-      default: `rgba(255, 255, 255, 0.8)`,
-      '@media (prefers-color-scheme: dark)': `rgba(0, 0, 0, 0.8)`,
-      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.bg}, transparent 80%)`,
-    },
+    backgroundColor: 'color-mix(in oklch, ${colors.bg}, transparent 80%)',
     backdropFilter: 'blur(5px)',
-    WebkitBackdropFilter: 'blur(5px)',
     zIndex: 10,
   },
   socialLinks: {
@@ -499,10 +491,7 @@ const styles = stylex.create({
   },
   bangCode: {
     fontFamily: fonts.mono,
-    backgroundColor: {
-      default: `rgba(128, 128, 128, 0.1)`,
-      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.fg}, transparent 90%)`,
-    },
+    backgroundColor: 'color-mix(in oklch, ${colors.fg}, transparent 90%)',
     padding: '2px 4px',
     borderRadius: '3px',
     fontWeight: 600,
