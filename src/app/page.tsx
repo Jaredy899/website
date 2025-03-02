@@ -20,14 +20,9 @@ export default function Home() {
           >
             Personal Applications
           </a>
-          <a
-            {...stylex.props(styles.navLink)}
-            href="https://unduck-two.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Unduck
-          </a>
+          <Link {...stylex.props(styles.navLink)} href="/bang">
+            Bang
+          </Link>
         </nav>
       </header>
       <main></main>
