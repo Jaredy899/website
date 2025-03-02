@@ -18,7 +18,7 @@ interface Bang {
 function BangContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [defaultBang, setDefaultBang] = useState('g');
+  const [defaultBang, setDefaultBang] = useState('jc');
   const [saveStatus, setSaveStatus] = useState({ message: '', isError: false, visible: false });
   const [isCopied, setIsCopied] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -31,9 +31,9 @@ function BangContent() {
       const bangCandidate = match?.[1]?.toLowerCase();
       
       // Get the stored default bang
-      let storedDefaultBang = 'g';
+      let storedDefaultBang = 'jc';
       if (typeof localStorage !== 'undefined') {
-        storedDefaultBang = localStorage.getItem('default-bang') || 'g';
+        storedDefaultBang = localStorage.getItem('default-bang') || 'jc';
       }
       
       const selectedBang = bangs.find((b: Bang) => b.t === bangCandidate) || 
