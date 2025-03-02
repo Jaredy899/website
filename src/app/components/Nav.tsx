@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation';
 export function Nav() {
   const pathname = usePathname();
   
-  // Only render nav on search page
-  if (pathname !== '/search') {
+  // Only render nav on search or unduck pages
+  if (pathname !== '/search' && pathname !== '/unduck') {
     return null;
   }
 
@@ -17,6 +17,9 @@ export function Nav() {
     <nav {...stylex.props(styles.navContainer)}>
       <Link {...stylex.props(styles.navLink)} href="/search">
         Search
+      </Link>
+      <Link {...stylex.props(styles.navLink)} href="/unduck">
+        Unduck
       </Link>
       <a
         {...stylex.props(styles.navLink)}

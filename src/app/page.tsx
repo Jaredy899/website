@@ -12,6 +12,9 @@ export default function Home() {
           <Link {...stylex.props(styles.navLink)} href="/search">
             Search
           </Link>
+          <Link {...stylex.props(styles.navLink)} href="/unduck">
+            Unduck
+          </Link>
           <a
             {...stylex.props(styles.navLink)}
             href="https://home.jaredcervantes.com"
