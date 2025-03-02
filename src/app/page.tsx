@@ -142,10 +142,7 @@ const styles = stylex.create({
   nav: {
     display: "flex",
     gap: spacing.lg,
-    flexDirection: {
-      default: "column",
-      "@media (min-width: 640px)": "row",
-    },
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 0,
