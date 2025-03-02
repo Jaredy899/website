@@ -73,10 +73,7 @@ const styles = stylex.create({
     position: "absolute",
     top: 8,
     width: "auto",
-    flexDirection: {
-      default: "column",
-      "@media (min-width: 768px)": "row",
-    },
+    flexDirection: "column", // Keep this as column for bang and search pages
     paddingRight: {
       default: "48px", // Make room for the dark mode toggle
       "@media (min-width: 768px)": spacing.sm,

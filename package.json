@@ -1,5 +1,5 @@
 {
-  "name": "nmn.sh",
+  "name": "jaredcervantes.com",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "bright": "^1.0.0",
+    "dotenv": "^16.4.7",
     "feed": "^4.2.2",
     "framer-motion": "^12.4.7",
     "next": "15.1.7",
