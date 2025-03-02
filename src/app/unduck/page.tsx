@@ -1,7 +1,7 @@
 'use client';
 import * as stylex from "@stylexjs/stylex";
 import { colors, spacing, text } from "../vars.stylex";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 // Import bangs array and define Bang interface
@@ -14,7 +14,8 @@ interface Bang {
   u: string;  // URL template with {{{s}}} placeholder
 }
 
-export default function UnduckPage() {
+// Main component that uses useSearchParams
+function UnduckContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [defaultBang, setDefaultBang] = useState('g');
@@ -231,6 +232,24 @@ export default function UnduckPage() {
   );
 }
 
+// Loading fallback component
+function LoadingFallback() {
+  return (
+    <div {...stylex.props(styles.container, styles.loadingContainer)}>
+      <div>Loading...</div>
+    </div>
+  );
+}
+
+// Export the page component with Suspense boundary
+export default function UnduckPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <UnduckContent />
+    </Suspense>
+  );
+}
+
 const styles = stylex.create({
   container: {
     display: 'flex',
@@ -239,6 +258,9 @@ const styles = stylex.create({
     justifyContent: 'flex-start',
     minHeight: 'calc(100vh - 120px)', // Reduced from 200px
     padding: spacing.xs,
+  },
+  loadingContainer: {
+    justifyContent: 'center',
   },
   contentContainer: {
     maxWidth: '600px',

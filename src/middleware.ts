@@ -70,5 +70,5 @@ export function middleware(request: NextRequest) {
 
 // Configure the middleware to run only on the /unduck path
 export const config = {
-  matcher: ['/unduck']
+  matcher: ['/unduck', '/unduck/(.*)']
 }; 
