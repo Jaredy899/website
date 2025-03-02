@@ -103,12 +103,16 @@ function BangContent() {
   
   const copyToClipboard = async () => {
     const url = `${window.location.origin}/bang?q=%s`;
-    await navigator.clipboard.writeText(url);
-    
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 2000);
+    try {
+      await navigator.clipboard.writeText(url);
+      
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy URL', err);
+    }
   };
   
   return (
@@ -116,7 +120,8 @@ function BangContent() {
       <div {...stylex.props(styles.contentContainer)}>
         <h1 {...stylex.props(styles.h1)}>Jared's Bang Search</h1>
         <p {...stylex.props(styles.description)}>
-          DuckDuckGo's bang redirects are too slow. Add the following URL as a custom search engine to your browser. 
+          Add the following URL as a custom search engine to your browser.
+          <br />
           Enables <a 
             href="https://duckduckgo.com/bang.html" 
             target="_blank" 
@@ -160,34 +165,20 @@ function BangContent() {
           <label {...stylex.props(styles.label)} htmlFor="default-bang">
             Default Bang (when no bang is specified):
           </label>
-          <div {...stylex.props(styles.inputRow)}>
-            <div {...stylex.props(styles.inputWrapper)}>
-              <input
-                type="text"
-                id="default-bang"
-                {...stylex.props(
-                  styles.defaultBangInput,
-                  saveStatus.isError && saveStatus.visible && styles.inputError
-                )}
-                value={defaultBang}
-                onChange={(e) => setDefaultBang(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') validateAndSaveBang();
-                }}
-                placeholder="Enter bang (e.g. g, gi, yt, w)"
-              />
-              <div 
-                {...stylex.props(
-                  styles.bangSaveStatus,
-                  saveStatus.visible && styles.statusVisible,
-                  saveStatus.isError ? styles.statusError : styles.statusSuccess
-                )}
-              >
-                {saveStatus.message}
-              </div>
-            </div>
+          <div {...stylex.props(styles.urlContainer)}>
+            <input
+              type="text"
+              id="default-bang"
+              {...stylex.props(styles.urlInput)}
+              value={defaultBang}
+              onChange={(e) => setDefaultBang(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') validateAndSaveBang();
+              }}
+              placeholder="Enter bang (e.g. g, gi, yt, w)"
+            />
             <button
-              {...stylex.props(styles.saveButton)}
+              {...stylex.props(styles.copyButton)}
               onClick={validateAndSaveBang}
               aria-label="Save default bang"
             >
@@ -205,6 +196,16 @@ function BangContent() {
                 )}
               </div>
             </button>
+          </div>
+          
+          <div 
+            {...stylex.props(
+              styles.bangSaveStatus,
+              saveStatus.visible && styles.statusVisible,
+              saveStatus.isError ? styles.statusError : styles.statusSuccess
+            )}
+          >
+            {saveStatus.message}
           </div>
           
           <div {...stylex.props(styles.bangInfoContainer)}>
