@@ -32,8 +32,8 @@ const styles = stylex.create({
   logoLink: {
     display: 'block',
     marginBottom: {
-      default: spacing.xl,
-      "@media (max-width: 600px)": spacing.xxl,
+      default: spacing.xs,
+      "@media (max-width: 600px)": spacing.sm,
     },
     position: 'relative',
     zIndex: 10,
@@ -43,8 +43,8 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginBottom: spacing.xl,
-    padding: spacing.sm,
+    marginBottom: spacing.xs,
+    padding: spacing.xs,
   },
   logo: {
     width: {

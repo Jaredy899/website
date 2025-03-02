@@ -6,7 +6,7 @@ import { Link } from "next-view-transitions";
 import Nav from "../components/Nav";
 
 export const metadata: Metadata = {
-  title: "Unduck | Jared Cervantes",
+  title: "Bang | Jared Cervantes",
   description: "Fast bang search redirects",
 };
 
@@ -32,8 +32,8 @@ const styles = stylex.create({
   logoLink: {
     display: 'block',
     marginBottom: {
-      default: spacing.sm,
-      "@media (max-width: 600px)": spacing.md,
+      default: spacing.xs,
+      "@media (max-width: 600px)": spacing.sm,
     },
     position: 'relative',
     zIndex: 10,
@@ -43,13 +43,13 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginBottom: spacing.sm,
+    marginBottom: spacing.xs,
     padding: spacing.xs,
   },
   logo: {
     width: {
-      default: 80,
-      "@media (max-width: 600px)": 50,
+      default: 100,
+      "@media (max-width: 600px)": 60,
     },
   },
   main: {
