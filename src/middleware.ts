@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { bangs } from './app/unduck/bang';
+import { bangs } from './app/bang/bang';
 
 // Define the Bang interface based on how it's used in the code
 interface Bang {
@@ -9,9 +9,9 @@ interface Bang {
 }
 
 export function middleware(request: NextRequest) {
-  // Only run this middleware for the /unduck path with a query parameter
+  // Only run this middleware for the /bang path with a query parameter
   const url = new URL(request.url);
-  if (!url.pathname.startsWith('/unduck')) {
+  if (!url.pathname.startsWith('/bang')) {
     return NextResponse.next();
   }
   
@@ -68,7 +68,7 @@ export function middleware(request: NextRequest) {
   return NextResponse.redirect(searchUrl);
 }
 
-// Configure the middleware to run only on the /unduck path
+// Configure the middleware to run only on the /bang path
 export const config = {
-  matcher: ['/unduck', '/unduck/(.*)']
+  matcher: ['/bang', '/bang/(.*)']
 }; 

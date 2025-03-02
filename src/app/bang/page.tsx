@@ -15,7 +15,7 @@ interface Bang {
 }
 
 // Main component that uses useSearchParams
-function UnduckContent() {
+function BangContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [defaultBang, setDefaultBang] = useState('g');
@@ -102,7 +102,7 @@ function UnduckContent() {
   };
   
   const copyToClipboard = async () => {
-    const url = `${window.location.origin}/unduck?q=%s`;
+    const url = `${window.location.origin}/bang?q=%s`;
     await navigator.clipboard.writeText(url);
     
     setIsCopied(true);
@@ -131,7 +131,7 @@ function UnduckContent() {
           <input
             type="text"
             {...stylex.props(styles.urlInput)}
-            value={`${typeof window !== 'undefined' ? window.location.origin : ''}/unduck?q=%s`}
+            value={`${typeof window !== 'undefined' ? window.location.origin : ''}/bang?q=%s`}
             readOnly
           />
           <button 
@@ -242,10 +242,10 @@ function LoadingFallback() {
 }
 
 // Export the page component with Suspense boundary
-export default function UnduckPage() {
+export default function BangPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <UnduckContent />
+      <BangContent />
     </Suspense>
   );
 }

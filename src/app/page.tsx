@@ -12,8 +12,8 @@ export default function Home() {
           <Link {...stylex.props(styles.navLink)} href="/search">
             Search
           </Link>
-          <Link {...stylex.props(styles.navLink)} href="/unduck">
-            Unduck
+          <Link {...stylex.props(styles.navLink)} href="/bang">
+            Bang
           </Link>
           <a
             {...stylex.props(styles.navLink)}
