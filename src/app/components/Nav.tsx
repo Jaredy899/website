@@ -81,6 +81,7 @@ const styles = stylex.create({
       default: "48px", // Make room for the dark mode toggle
       "@media (min-width: 768px)": spacing.sm,
     },
+    alignItems: "center",
   },
   navLink: {
     color: "light-dark(crimson, cornflowerblue)",
@@ -92,6 +93,8 @@ const styles = stylex.create({
     textUnderlineOffset: "8px",
     width: "fit-content",
     textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
   },
   iconContainer: {
     display: 'inline-flex',
@@ -99,6 +102,7 @@ const styles = stylex.create({
     height: '1.5em',
     alignItems: 'center',
     justifyContent: 'center',
+    verticalAlign: 'middle',
   },
   iconImg: {
     width: '100%',

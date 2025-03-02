@@ -122,6 +122,8 @@ const styles = stylex.create({
     height: "70vh",
     paddingBlock: spacing.sm,
     marginTop: spacing.xl,
+    width: "100%",
+    textAlign: "center",
   },
   h3: {
     fontSize: "2rem",
@@ -133,8 +135,9 @@ const styles = stylex.create({
       default: 500,
       "@media (max-width: 600px)": 350,
     },
-    transform: "translateX(-3%)",
+    transform: "translateX(0)",
     width: "calc(100% - 32px)",
+    margin: "0 auto",
   },
   nav: {
     display: "flex",
@@ -144,7 +147,9 @@ const styles = stylex.create({
       "@media (min-width: 640px)": "row",
     },
     alignItems: "center",
+    justifyContent: "center",
     marginBottom: 0,
+    width: "100%",
   },
   navLink: {
     color: "light-dark(crimson, cornflowerblue)",
@@ -156,6 +161,8 @@ const styles = stylex.create({
     textUnderlineOffset: "8px",
     width: "fit-content",
     textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
   },
   footer: {
     marginTop: 'auto',
@@ -193,6 +200,7 @@ const styles = stylex.create({
     height: '1.5em',
     alignItems: 'center',
     justifyContent: 'center',
+    verticalAlign: 'middle',
   },
   iconImg: {
     width: '100%',
