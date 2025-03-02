@@ -1,6 +1,6 @@
 'use client';
 import * as stylex from "@stylexjs/stylex";
-import { colors, spacing, text } from "../vars.stylex";
+import { colors, spacing, text, fonts } from "../vars.stylex";
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
@@ -205,6 +205,12 @@ function BangContent() {
                 )}
               </div>
             </button>
+          </div>
+          
+          <div {...stylex.props(styles.bangInfoContainer)}>
+            <p {...stylex.props(styles.bangInfoText)}>
+              <span {...stylex.props(styles.bangCode)}>g</span> - Google Search &nbsp;|&nbsp; <span {...stylex.props(styles.bangCode)}>jc</span> - Jared's private search
+            </p>
           </div>
         </div>
       </div>
@@ -454,5 +460,21 @@ const styles = stylex.create({
     width: '1.5em',
     height: '1.5em',
     fill: 'currentColor',
+  },
+  bangInfoContainer: {
+    marginTop: spacing.md,
+    fontSize: '0.85rem',
+    textAlign: 'center',
+    width: '100%',
+  },
+  bangInfoText: {
+    marginBottom: spacing.xs,
+  },
+  bangCode: {
+    fontFamily: fonts.mono,
+    backgroundColor: 'color-mix(in oklch, ${colors.fg}, transparent 90%)',
+    padding: '2px 4px',
+    borderRadius: '3px',
+    fontWeight: 600,
   },
 });
