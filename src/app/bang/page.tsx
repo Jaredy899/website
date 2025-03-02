@@ -304,7 +304,10 @@ const styles = stylex.create({
     width: '100%',
     padding: spacing.sm,
     borderRadius: '8px',
-    backgroundColor: 'color-mix(in oklch, ${colors.bg}, transparent 50%)',
+    backgroundColor: {
+      default: `rgba(128, 128, 128, 0.05)`,
+      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.bg}, transparent 50%)`,
+    },
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     marginTop: spacing.xs,
     marginBottom: '120px',
@@ -339,15 +342,26 @@ const styles = stylex.create({
     marginBottom: spacing.sm,
     borderRadius: '4px',
     overflow: 'hidden',
-    border: `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    border: {
+      default: `1px solid ${colors.fg}`,
+      '@media (color-gamut: p3)': `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    },
+    backgroundColor: {
+      default: 'transparent',
+      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.bg}, transparent 95%)`,
+    },
   },
   urlInput: {
     flexGrow: 1,
     padding: `${spacing.xs} ${spacing.sm}`,
     border: 'none',
+    outline: 'none',
     backgroundColor: 'transparent',
     color: colors.fg,
     fontSize: '0.9rem',
+    minWidth: 0,
+    WebkitAppearance: 'none',
+    appearance: 'none',
   },
   copyButton: {
     display: 'flex',
@@ -356,12 +370,19 @@ const styles = stylex.create({
     padding: spacing.xs,
     backgroundColor: 'transparent',
     border: 'none',
-    borderLeft: `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    borderLeft: {
+      default: `1px solid ${colors.fg}`,
+      '@media (color-gamut: p3)': `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
+    },
     cursor: 'pointer',
     transition: 'background-color 0.2s ease',
     ':hover': {
-      backgroundColor: 'color-mix(in oklch, ${colors.fg}, transparent 95%)',
+      backgroundColor: {
+        default: `rgba(128, 128, 128, 0.1)`,
+        '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.fg}, transparent 95%)`,
+      },
     },
+    color: colors.fg,
   },
   iconContainer: {
     display: 'flex',
@@ -437,8 +458,13 @@ const styles = stylex.create({
     padding: spacing.md,
     textAlign: 'center',
     width: '100%',
-    backgroundColor: 'color-mix(in oklch, ${colors.bg}, transparent 80%)',
+    backgroundColor: {
+      default: `rgba(255, 255, 255, 0.8)`,
+      '@media (prefers-color-scheme: dark)': `rgba(0, 0, 0, 0.8)`,
+      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.bg}, transparent 80%)`,
+    },
     backdropFilter: 'blur(5px)',
+    WebkitBackdropFilter: 'blur(5px)',
     zIndex: 10,
   },
   socialLinks: {
@@ -473,7 +499,10 @@ const styles = stylex.create({
   },
   bangCode: {
     fontFamily: fonts.mono,
-    backgroundColor: 'color-mix(in oklch, ${colors.fg}, transparent 90%)',
+    backgroundColor: {
+      default: `rgba(128, 128, 128, 0.1)`,
+      '@media (color-gamut: p3)': `color-mix(in oklch, ${colors.fg}, transparent 90%)`,
+    },
     padding: '2px 4px',
     borderRadius: '3px',
     fontWeight: 600,
