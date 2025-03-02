@@ -1,7 +1,7 @@
 'use client';
 import * as stylex from "@stylexjs/stylex";
 import { colors, spacing, text } from "../vars.stylex";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 // Import bangs array and define Bang interface
@@ -14,6 +14,54 @@ interface Bang {
   u: string;  // URL template with {{{s}}} placeholder
 }
 
+// Helper function to get bang redirect URL
+function getBangRedirectUrl(query: string): string | null {
+  if (!query) return null;
+  
+  const match = query.match(/!(\S+)/i);
+  const bangCandidate = match?.[1]?.toLowerCase();
+  
+  // Get the stored default bang (safely)
+  let storedDefaultBang = 'g';
+  if (typeof window !== 'undefined') {
+    storedDefaultBang = localStorage.getItem('default-bang') || 'g';
+  }
+  
+  const selectedBang = bangs.find((b: Bang) => b.t === bangCandidate) || 
+                       bangs.find((b: Bang) => b.t === storedDefaultBang);
+  
+  if (!selectedBang) return null;
+  
+  // Remove the first bang from the query
+  const cleanQuery = query.replace(/!\S+\s*/i, '').trim();
+  
+  // Format of the url is: https://www.google.com/search?q={{{s}}}
+  const searchUrl = selectedBang.u.replace(
+    '{{{s}}}',
+    // Replace %2F with / to fix formats like "!ghr+t3dotgg/unduck"
+    encodeURIComponent(cleanQuery).replace(/%2F/g, '/')
+  );
+  
+  return searchUrl;
+}
+
+// Redirect component that handles the redirect logic
+function BangRedirect() {
+  const searchParams = useSearchParams();
+  
+  useLayoutEffect(() => {
+    const query = searchParams.get('q')?.trim();
+    if (query) {
+      const redirectUrl = getBangRedirectUrl(query);
+      if (redirectUrl) {
+        window.location.replace(redirectUrl);
+      }
+    }
+  }, [searchParams]);
+  
+  return null;
+}
+
 export default function UnduckPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -22,41 +70,11 @@ export default function UnduckPage() {
   const [isCopied, setIsCopied] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   
-  // Check if we need to handle a query (in case middleware didn't catch it)
-  useEffect(() => {
-    const query = searchParams.get('q')?.trim();
-    if (query) {
-      const match = query.match(/!(\S+)/i);
-      const bangCandidate = match?.[1]?.toLowerCase();
-      
-      // Get the stored default bang
-      let storedDefaultBang = 'g';
-      if (typeof localStorage !== 'undefined') {
-        storedDefaultBang = localStorage.getItem('default-bang') || 'g';
-      }
-      
-      const selectedBang = bangs.find((b: Bang) => b.t === bangCandidate) || 
-                           bangs.find((b: Bang) => b.t === storedDefaultBang);
-      
-      if (selectedBang) {
-        // Remove the first bang from the query
-        const cleanQuery = query.replace(/!\S+\s*/i, '').trim();
-        
-        // Format of the url is: https://www.google.com/search?q={{{s}}}
-        const searchUrl = selectedBang.u.replace(
-          '{{{s}}}',
-          // Replace %2F with / to fix formats like "!ghr+t3dotgg/unduck"
-          encodeURIComponent(cleanQuery).replace(/%2F/g, '/')
-        );
-        
-        // Redirect immediately
-        window.location.replace(searchUrl);
-      }
-    }
-  }, [searchParams]);
+  // Check for query parameter and handle redirect
+  const query = searchParams.get('q')?.trim();
   
-  // Load default bang from localStorage
   useEffect(() => {
+    // Only load default bang from localStorage if we're not redirecting
     if (typeof window !== 'undefined') {
       const storedDefaultBang = localStorage.getItem('default-bang');
       if (storedDefaultBang) {
@@ -64,6 +82,11 @@ export default function UnduckPage() {
       }
     }
   }, []);
+  
+  // If there's a query, render the redirect component
+  if (query) {
+    return <BangRedirect />;
+  }
   
   const validateAndSaveBang = () => {
     const inputValue = defaultBang.trim();
@@ -81,11 +104,7 @@ export default function UnduckPage() {
       return;
     }
     
-    // Save to localStorage for client-side use
     localStorage.setItem('default-bang', cleanBang);
-    
-    // Also save as a cookie for server-side use (route handler)
-    document.cookie = `default-bang=${cleanBang}; path=/; max-age=31536000; SameSite=Strict`;
     
     setSaveStatus({
       message: `Using !${cleanBang} (${selectedBang.s}) as default bang`,
@@ -360,31 +379,4 @@ const styles = stylex.create({
     justifyContent: 'center',
     padding: spacing.xs,
     backgroundColor: 'transparent',
-    border: `1px solid color-mix(in oklch, ${colors.fg}, transparent 75%)`,
-    borderRadius: '4px',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s ease',
-    ':hover': {
-      backgroundColor: 'color-mix(in oklch, ${colors.fg}, transparent 95%)',
-    },
-  },
-  footer: {
-    marginTop: spacing.sm,
-    padding: spacing.xs,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: spacing.sm,
-    fontSize: '0.85rem',
-  },
-  footerLink: {
-    color: colors.accent,
-    textDecoration: 'none',
-    ':hover': {
-      textDecoration: 'underline',
-    },
-  },
-  footerDivider: {
-    color: 'color-mix(in oklch, ${colors.fg}, transparent 40%)',
-  },
-});
+    border: `
