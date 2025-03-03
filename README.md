@@ -1,1 +1,1 @@
-## This is my personal website based from another website. 
+## This is my personal website.
