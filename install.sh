@@ -8,6 +8,43 @@ eval "$(curl -s https://raw.githubusercontent.com/Jaredy899/linux/refs/heads/mai
 checkEnv || exit 1
 checkDistro
 
+# Function to configure firewall
+configure_firewall() {
+    printf "%b\n" "${YELLOW}Configuring firewall for development server...${RC}"
+    
+    # Check for firewalld
+    if command_exists firewall-cmd; then
+        printf "%b\n" "${YELLOW}Using firewalld...${RC}"
+        "$ESCALATION_TOOL" firewall-cmd --add-port=3000/tcp --permanent
+        "$ESCALATION_TOOL" firewall-cmd --reload
+        printf "%b\n" "${GREEN}Firewall configured successfully for port 3000.${RC}"
+    # Check for ufw
+    elif command_exists ufw; then
+        printf "%b\n" "${YELLOW}Using ufw...${RC}"
+        "$ESCALATION_TOOL" ufw allow 3000/tcp
+        "$ESCALATION_TOOL" ufw reload
+        printf "%b\n" "${GREEN}Firewall configured successfully for port 3000.${RC}"
+    else
+        printf "%b\n" "${YELLOW}No supported firewall found. Please configure port 3000 manually.${RC}"
+    fi
+}
+
+# Function to source shell configuration
+source_shell_config() {
+    if [ -f "$HOME/.bashrc" ]; then
+        printf "%b\n" "${YELLOW}Sourcing bash configuration...${RC}"
+        . "$HOME/.bashrc"
+    elif [ -f "$HOME/.zshrc" ]; then
+        printf "%b\n" "${YELLOW}Sourcing zsh configuration...${RC}"
+        . "$HOME/.zshrc"
+    else
+        printf "%b\n" "${RED}No shell configuration file found. Please create one and add:${RC}"
+        printf "%b\n" "${YELLOW}export PNPM_HOME=\"\$HOME/.local/share/pnpm\"${RC}"
+        printf "%b\n" "${YELLOW}export PATH=\"\$PNPM_HOME:\$PATH\"${RC}"
+        exit 1
+    fi
+}
+
 # Function to install Node.js and pnpm
 install_nodejs() {
     if ! command_exists node; then
@@ -40,6 +77,16 @@ install_nodejs() {
         printf "%b\n" "${YELLOW}Installing pnpm...${RC}"
         curl -fsSL https://get.pnpm.io/install.sh | sh -
         printf "%b\n" "${GREEN}pnpm installed successfully.${RC}"
+        
+        # Source shell configuration to make pnpm available
+        source_shell_config
+        
+        # Verify pnpm is now available
+        if ! command_exists pnpm; then
+            printf "%b\n" "${RED}Failed to make pnpm available. Please try running:${RC}"
+            printf "%b\n" "${YELLOW}source ~/.bashrc${RC}"
+            exit 1
+        fi
     else
         printf "%b\n" "${GREEN}pnpm is already installed.${RC}"
     fi
@@ -103,6 +150,9 @@ setup_env
 
 # Install dependencies
 install_dependencies
+
+# Configure firewall
+configure_firewall
 
 # Display completion message
 printf "%b\n" "${GREEN}Installation completed successfully!${RC}"
