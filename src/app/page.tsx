@@ -141,7 +141,7 @@ const styles = stylex.create({
   },
   nav: {
     display: "flex",
-    gap: spacing.lg,
+    gap: spacing.xl,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
