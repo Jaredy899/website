@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+# Note for PowerShell 5 users: If you encounter a 308 Permanent Redirect error when using 'irm jaredcervantes.com/win | iex',
+# use one of these commands instead:
+# iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/Jaredy899/win/main/first-setup.ps1')
+# Or alternatively:
+# iex ((Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Jaredy899/win/main/first-setup.ps1' -UseBasicParsing).Content)
+
 # Source the common scripts directly from GitHub
 eval "$(curl -s https://raw.githubusercontent.com/Jaredy899/linux/refs/heads/main/common_script.sh)"
 eval "$(curl -s https://raw.githubusercontent.com/Jaredy899/linux/refs/heads/main/common_service_script.sh)"

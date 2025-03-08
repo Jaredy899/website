@@ -13,6 +13,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/winps5',
+        destination: process.env.REDIRECT_WIN,
+        permanent: false,
+      },
+      {
         source: '/linux',
         destination: process.env.REDIRECT_LINUX,
         permanent: true,
