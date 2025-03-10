@@ -57,16 +57,16 @@ RUN adduser --system --uid 1001 nextjs
 RUN mkdir -p /app/public/images
 RUN chown -R nextjs:nodejs /app/public
 
+# Copy public files
 COPY --from=builder /app/public ./public
 RUN chown -R nextjs:nodejs /app/public
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
+# Set up the application
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Set proper permissions
+RUN chown -R nextjs:nodejs /app
 
 USER nextjs
 
@@ -75,4 +75,5 @@ EXPOSE 3000
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
+# Command to run the application
 CMD ["node", "server.js"] 
