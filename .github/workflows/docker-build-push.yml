@@ -29,5 +29,5 @@ jobs:
           context: .
           push: true
           tags: jaredy89/website:latest
-          cache-from: type=registry,ref=jaredy89/website:buildcache
-          cache-to: type=registry,ref=jaredy89/website:buildcache,mode=max 
+          cache-from: type=gha
+          cache-to: type=gha,mode=max 
