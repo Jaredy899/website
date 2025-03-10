@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install pnpm globally
-RUN npm install -g pnpm@10.5.2
+RUN npm install -g pnpm@10.6.2
 
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
@@ -20,7 +20,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Install pnpm in builder stage
-RUN npm install -g pnpm@10.5.2
+RUN npm install -g pnpm@10.6.2
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
