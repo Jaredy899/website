@@ -1,11 +1,17 @@
----
+version: '3.8'
+
 services:
   web:
-    image: jaredy89/website:latest
     container_name: website
+    image: jaredy89/website:latest
     ports:
       - "9000:3000"
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
+      - REDIRECT_MAC=${REDIRECT_MAC:-https://example.com/mac}
+      - REDIRECT_WIN=${REDIRECT_WIN:-https://example.com/win}
+      - REDIRECT_LINUX=${REDIRECT_LINUX:-https://example.com/linux}
+      - REDIRECT_LINUX_DEV=${REDIRECT_LINUX_DEV:-https://example.com/linuxdev}
+      - REDIRECT_DEBIAN=${REDIRECT_DEBIAN:-https://example.com/debian}
     restart: unless-stopped 

@@ -32,6 +32,13 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # Set production environment
 ENV NODE_ENV production
 
+# Set redirect environment variables for build
+ENV REDIRECT_MAC="https://example.com/mac"
+ENV REDIRECT_WIN="https://example.com/win"
+ENV REDIRECT_LINUX="https://example.com/linux"
+ENV REDIRECT_LINUX_DEV="https://example.com/linuxdev"
+ENV REDIRECT_DEBIAN="https://example.com/debian"
+
 # Build the application
 RUN pnpm build
 
