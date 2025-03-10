@@ -1,0 +1,11 @@
+---
+services:
+  web:
+    image: jaredy89/website:latest
+    container_name: website
+    ports:
+      - "9000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    restart: unless-stopped 
