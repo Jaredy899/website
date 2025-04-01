@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/mac",
+      "destination": "/api/redirect?to=mac",
+      "permanent": false
+    },
+    {
+      "source": "/win",
+      "destination": "/api/redirect?to=win",
+      "permanent": false
+    },
+    {
+      "source": "/linux",
+      "destination": "/api/redirect?to=linux",
+      "permanent": false
+    },
+    {
+      "source": "/linuxdev",
+      "destination": "/api/redirect?to=linuxdev",
+      "permanent": false
+    },
+    {
+      "source": "/debian",
+      "destination": "/api/redirect?to=debian",
+      "permanent": false
+    }
+  ]
+} 
