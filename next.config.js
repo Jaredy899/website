@@ -11,7 +11,7 @@ const nextConfig = {
       {
         source: '/win',
         destination: process.env.REDIRECT_WIN,
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/winps5',
