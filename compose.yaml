@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   web:
     container_name: website
-    image: jaredy89/website:latest
+    image: ghcr.io/jaredy899/website:latest
     ports:
       - "9000:3000"
     environment:
