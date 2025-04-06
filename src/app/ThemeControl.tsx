@@ -11,7 +11,7 @@ export default function ThemeControl({
   children: React.ReactNode;
   style?: stylex.StyleXStyles;
 }>) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   return (
     <body {...stylex.props(themes[theme], styles.container, style)}>
