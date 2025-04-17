@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import * as stylex from "@stylexjs/stylex";
-import { colors, fonts, spacing } from "./vars.stylex";
+import { colors, fonts } from "./vars.stylex";
 import ThemeControl from "./ThemeControl";
 import "./app.css";
 import { ViewTransitions } from "next-view-transitions";
