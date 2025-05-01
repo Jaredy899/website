@@ -32,6 +32,19 @@ const styles = stylex.create({
     },
     alignItems: "center",
   },
+  navLink: {
+    color: "var(--color-fg)",
+    textDecoration: {
+      default: "none",
+      ":hover": "underline",
+    },
+    textTransform: "uppercase",
+    textUnderlineOffset: "8px",
+    width: "fit-content",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+  },
 });
 
 export default Nav;
@@ -125,7 +138,7 @@ const styles = stylex.create({
     alignItems: "center",
   },
   navLink: {
-    color: "light-dark(crimson, cornflowerblue)",
+    color: "var(--color-fg)",
     textDecoration: {
       default: "none",
       ":hover": "underline",

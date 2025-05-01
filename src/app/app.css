@@ -2,6 +2,15 @@
   :root {
     --font-inter: "Inter", "Impact", sans-serif;
     --font-baskerville: "Baskerville", "Garamond", serif;
+    --color-fg: #000000;
+    --color-bg: #fff;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-fg: #ededed;
+      --color-bg: #0a0a0a;
+    }
   }
 
   html,

@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.homeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--color-fg);
+  transition: opacity 0.2s ease-in-out;
+}
+
+.homeButton:hover {
+  opacity: 0.8;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLink {
+  color: var(--color-fg);
+  transition: opacity 0.2s ease-in-out;
+}
+
+.socialLink:hover {
+  opacity: 0.8;
+} 

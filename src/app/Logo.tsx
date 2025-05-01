@@ -1,64 +1,32 @@
+"use client";
+
+import { useTheme } from "./ThemeControl";
+import styles from "./Logo.module.css";
 import * as stylex from "@stylexjs/stylex";
-import { vars } from "./logoVars.stylex";
-import { colors } from "./vars.stylex";
 
-type Props = {
-  collapsible?: boolean;
-  style?: stylex.StyleXStyles;
-};
-
-export default function Logo({ collapsible = false, style }: Props) {
+export default function Logo({ collapsible = false, style }: { collapsible?: boolean, style?: any }) {
+  const theme = useTheme();
+  
   return (
-    <svg
-      {...stylex.props(styles.container, collapsible && styles.collapse, style)}
-      viewBox="0 0 600 419"
-    >
-      <g {...stylex.props(styles.letter, collapsible && styles.outerScale)}>
-        <path
-          {...stylex.props(styles.letter, styles.j)}
-          aria-label="J"
-          d="M285 0H240V334.06C240 354.821 223.018 371.797 202.25 371.797H100V416.797H202.25C248.027 416.797 285 379.775 285 334.06V0Z"
-        />
-        
-        <path
-          {...stylex.props(styles.letter, styles.c)}
-          aria-label="C"
-          d="M300 82.7372C300 37.0217 337.027 0 382.75 0H525V45H382.75C361.988 45 345.006 61.9759 345.006 82.7372V334.06C345.006 354.821 361.988 371.797 382.75 371.797H525V416.797H382.75C337.027 416.797 300 379.775 300 334.06V82.7372Z"
-        />
-      </g>
-    </svg>
+    <div {...stylex.props(style)} className={styles.container}>
+      <svg
+        viewBox="0 -20 600 459"
+        fill={theme === "light" ? "#171717" : "#ededed"}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g className={styles.letterGroup}>
+          <path
+            className={styles.letter}
+            aria-label="J"
+            d="M285 0H240V334.06C240 354.821 223.018 371.797 202.25 371.797H100V416.797H202.25C248.027 416.797 285 379.775 285 334.06V0Z"
+          />
+          <path
+            className={styles.letter}
+            aria-label="C"
+            d="M300 82.7372C300 37.0217 337.027 0 382.75 0H525V45H382.75C361.988 45 345.006 61.9759 345.006 82.7372V334.06C345.006 354.821 361.988 371.797 382.75 371.797H525V416.797H382.75C337.027 416.797 300 379.775 300 334.06V82.7372Z"
+          />
+        </g>
+      </svg>
+    </div>
   );
 }
-
-const styles = stylex.create({
-  container: {
-    aspectRatio: 600 / 419,
-    containerType: "inline-size",
-    [vars.collapsed]: 0,
-    fill: colors.fg,
-    // eslint-disable-next-line @stylexjs/valid-styles
-    viewTransitionName: "logo",
-  },
-  collapse: {
-    [vars.collapsed]: {
-      default: 0,
-      ":hover": 1,
-    },
-  },
-  outerScale: {
-    scale: `calc(0.75 + ${vars.collapsed} * 0.25)`,
-    transformOrigin: "center",
-    transitionProperty: "scale",
-  },
-  letter: {
-    transitionDuration: "0.15s",
-    transitionProperty: "transform",
-    transitionTimingFunction: "ease-out",
-  },
-  j: {
-    transform: `translateX(calc(${vars.collapsed} * -5cqi))`,
-  },
-  c: {
-    transform: `translateX(calc(${vars.collapsed} * 5cqi))`,
-  },
-});

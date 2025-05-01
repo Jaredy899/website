@@ -2,7 +2,13 @@
 
 import * as stylex from "@stylexjs/stylex";
 import { colors, spacing } from "./vars.stylex";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
+
+export const ThemeContext = createContext<"light" | "dark">("dark");
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
 
 export default function ThemeControl({
   children,
@@ -14,15 +20,17 @@ export default function ThemeControl({
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   return (
-    <body {...stylex.props(themes[theme], styles.container, style)}>
-      <button
-        {...stylex.props(styles.btn)}
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      >
-        {theme === "light" ? <MoonIcon /> : <SunIcon />}
-      </button>
-      {children}
-    </body>
+    <ThemeContext.Provider value={theme}>
+      <body {...stylex.props(themes[theme], styles.container, style)}>
+        <button
+          {...stylex.props(styles.btn)}
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        >
+          {theme === "light" ? <MoonIcon /> : <SunIcon />}
+        </button>
+        {children}
+      </body>
+    </ThemeContext.Provider>
   );
 }
 

@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  aspect-ratio: 600/459;
+  container-type: size;
+  view-transition-name: logo;
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 350px;
+  }
+}
+
+.collapsible {
+  --collapse-state: 0;
+}
+
+.collapsible:hover {
+  --collapse-state: 1;
+}
+
+.letterGroup {
+  transform: scale(calc(0.9 + var(--collapse-state) * 0.1));
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.letter {
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.letter:first-child {
+  transform: translateX(calc(var(--collapse-state) * -3%));
+}
+
+.letter:last-child {
+  transform: translateX(calc(var(--collapse-state) * 3%));
+}
+
+.container:hover .letterGroup {
+  transform: translateY(-5px);
+}
+
+.container:hover .letter:nth-child(1) {
+  transform: translateX(-15px);
+}
+
+.container:hover .letter:nth-child(2) {
+  transform: translateX(15px);
+} 
